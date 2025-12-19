@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/dicoding/kodingan/sml/Workflow-CI/mlruns/0/f7c1fee3f9ce4b4ebc9dc1d8bddbbedd/artifacts
+end_time: 1766074919606
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f7c1fee3f9ce4b4ebc9dc1d8bddbbedd
+run_name: dashing-loon-884
+run_uuid: f7c1fee3f9ce4b4ebc9dc1d8bddbbedd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766074915096
+status: 3
+tags: []
+user_id: mycom
