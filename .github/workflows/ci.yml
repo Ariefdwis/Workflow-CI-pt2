@@ -5,7 +5,6 @@ on:
     branches: [ "main" ]
 
 jobs:
- 
   train_model:
     runs-on: ubuntu-latest
     steps:
@@ -19,15 +18,20 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install pandas scikit-learn mlflow
+          python -m pip install --upgrade pip
+          # Menambahkan library dagshub agar bisa connect ke remote
+          pip install pandas scikit-learn mlflow dagshub
 
-      - name: Run Model Training
-       
+      - name: Run Model Training (Retraining with MLflow)
+        env:
+          MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+          MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+          MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
         run: |
           cd MLProject
+          # Pastikan file modelling.py di folder ini ISINYA adalah script yang Advanced (yang connect ke DagsHub)
           python modelling.py
 
-  
   build_push_docker:
     needs: train_model
     runs-on: ubuntu-latest
@@ -44,8 +48,6 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
-          
           context: ./MLProject
           push: true
-          
           tags: ${{ secrets.DOCKER_USERNAME }}/water-potability-model:latest
