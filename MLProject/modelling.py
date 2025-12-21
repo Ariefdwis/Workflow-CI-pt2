@@ -19,7 +19,6 @@ def main():
     
 
     mlflow.set_tracking_uri("https://dagshub.com/Ariefdwis/Eksperimen_MSML_AriefDwiSeptian_pt2.mlflow")
-    mlflow.set_experiment("CI_CD_Retraining_Experiment")
 
     print("MLflow Tracking URI:", mlflow.get_tracking_uri())
 
