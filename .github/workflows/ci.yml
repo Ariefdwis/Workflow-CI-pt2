@@ -29,7 +29,7 @@ jobs:
           DAGSHUB_USER_TOKEN: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
         run: |
           cd MLProject
-          mlflow run . --env-manager=local
+          mlflow run . --env-manager=local --experiment-name CI_CD_Retraining_Experiment
 
   build_push_docker:
     needs: train_model
