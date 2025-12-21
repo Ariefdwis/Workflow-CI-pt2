@@ -21,16 +21,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install pandas scikit-learn mlflow dagshub seaborn matplotlib
 
-      - name: Run Model Training
+      - name: Run Model Training (MLflow Run)
         env:
           MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
           MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
           MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
           DAGSHUB_USER_TOKEN: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
-          
         run: |
           cd MLProject
-          python modelling.py
+          mlflow run . --env-manager=local
 
   build_push_docker:
     needs: train_model
